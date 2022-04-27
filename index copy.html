@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs tamplate</title>
+</head>
+<style>
+    .bwdtz-tab-one {
+    display: flex;
+    padding-bottom: 70px;
+}
+
+.bwdtz-tab-one .bwdtz-nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    flex-direction: column;
+    margin-right: 35px;
+}
+
+.bwdtz-tab-one .bwdtz-nav-link {
+    background: 0 0;
+    border: 0;
+    border-radius: 8px;
+    display: block;
+    padding: 15px;
+    color: #30336b;
+    text-decoration: none;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.bwdtz-tab-one .bwdtz-nav-link.active-link {
+    color: #fff;
+    background-color: #30336b;
+}
+
+.bwdtz-tab-one .bwdtz-tab-content .bwdtz-tab-pane {
+    display: none;
+    transform: translateY(-110%);
+    transition: .5s;
+}
+
+.bwdtz-tab-one .bwdtz-tab-content .bwdtz-tab-pane.active-tab-pane {
+    display: block;
+    transform: translateY(0);
+}
+
+.bwdtz-tab-one .bwdtz-tab-content {
+    background: rgba(187, 187, 187, 0.171);
+    padding: 30px;
+}
+
+.bwdtz-tab-one .bwdtz-bwdtz-tab-content .bwdtz-tab-pane p {
+    color: #535c68;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+</style>
+<body>
+    <!-- tab-one -->
+    <div class="bwdtz-tab-one">
+        <div class="bwdtz-nav">
+            <button class="bwdtz-nav-link active-link" id="home-tab">Home</button>
+            <button class="bwdtz-nav-link" id="profile-tab">Profile</button>
+            <button class="bwdtz-nav-link" id="messages-tab">Messages</button>
+            <button class="bwdtz-nav-link" id="settings-tab">Settings</button>
+        </div>
+        <div class="bwdtz-tab-content">
+            <div class="bwdtz-tab-pane active-tab-pane" id="home">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate eaque ullam dolore ex quam nesciunt debitis deserunt cumque tempora, vitae, sapiente nostrum culpa nulla doloribus! Atque, necessitatibus explicabo. Facilis, voluptatibus?</p>
+            </div>
+            <div class="bwdtz-tab-pane" id="profile">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non dolore, ipsa, minima rem laborum pariatur modi saepe sint laboriosam, est possimus dicta error reprehenderit beatae cumque praesentium impedit nam nostrum.</p>
+            </div>
+            <div class="bwdtz-tab-pane" id="messages">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati repudiandae error quibusdam distinctio veritatis. Labore quam excepturi iure ullam, saepe fugit voluptas itaque vitae, alias sed delectus voluptatibus recusandae beatae.</p>
+            </div>
+            <div class="bwdtz-tab-pane" id="settings">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet perferendis quis neque enim nulla, voluptas accusantium voluptates inventore pariatur amet delectus at! Qui possimus, veritatis porro enim adipisci tempora laudantium.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        "use strict"
+// tab maker root
+function TabMaker(tabButtons, tabItems, btnActive, tabActive, progressLine,dir, res) {
+    for (let i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].addEventListener('click', function () {
+            for (let j = 0; j < tabButtons.length; j++) {
+
+                // tab button class active/remove
+                tabButtons[j].classList.remove(btnActive);
+                this.classList.add(btnActive);
+
+                // tab contents class active/remove
+                tabItems[j].classList.remove(tabActive);
+                tabItems[i].classList.add(tabActive);
+            }
+
+            if (progressLine) {
+
+                let singlePgWidth = 100 / tabItems.length;
+
+                if(dir==='width'){
+                    progressLine.style.width = singlePgWidth * (i + 1) + '%';
+                }
+                else if(dir==='height'){
+                    progressLine.style.height = singlePgWidth * (i + 1) + '%';
+                }
+
+                if(res &&  window.innerWidth < 768){
+                    progressLine.style.height = 100 + '%';
+                    progressLine.style.width = singlePgWidth * (i + 1) + '%';
+                }
+                
+            }
+        })
+
+
+
+
+
+    }
+}
+
+// // tab one=== === === === === === === ===
+const tabOneBtns = document.querySelectorAll('.bwdtz-tab-one .bwdtz-nav .bwdtz-nav-link');
+const tabOneContents = document.querySelectorAll('.bwdtz-tab-one .bwdtz-tab-content .bwdtz-tab-pane');
+TabMaker(tabOneBtns, tabOneContents, 'active-link', 'active-tab-pane');
+
+    </script>
+</body>
+</html>
